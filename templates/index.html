@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> GeoDatabases </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  </head>
+
+  <body>
+    <div class=  "container" >
+    <h2> Table of Contents </h2>
+    <ol>
+      <li> <a href = "#1"> What is a geodatabase? </a></li>
+      <li> <a href = "#2"> Types of Geodatabases </a></li>
+      <li> <a href = "#3"> Usage with Python </a></li>
+      <li> <a href = "#4"> Advantages of Geodatabases </a></li>
+      <li> <a href = "#5"> Drawbacks of Geodatabases </a></li>
+      <li> <a href = "#6"> Sources </a></li>
+    </ol>
+
+    <!-------------------------------------------------------->
+    <hr>
+    <!-------------------------------------------------------->
+
+    <h3> <a name = "1"> What is a geodatabase? </a></h3>
+    <p> A geodatabase is a relational database that stores geographic data. It is a container for storing <b> spatial and attribute data </b> and the relationships that exist among them. Geodatabases store information in vector data format. They come in many sizes and have varying numbers of users, and can be created, edited, and managed using ArcCatalog™ and ArcMap™.
+
+    <br>
+    <img src="{{url_for('static', filename='img1.png')}}"width = "50px" height = "50px">
+    <br>
+    These layers are examples of geographic data that might be found in a geodatabase.
+
+    The geodatabase contains three primary dataset types: feature classes, raster datasets, and tables.
+    <d1>
+      <dt> Feature class </dt>
+        <dd>  - a table with a shape field containing point, line, or polygon geometries for geographic features.
+        </dd>
+      <dt> Raster dataset</dt>
+        <dd>  - contains rasters which represent continuous geographic phenomena
+        </dd>
+      <dt> Table</dt>
+        <dd>  - collection of rows, each containing the same fields
+          <ul>
+            <li> Feature classes are tables with shape fields.
+            </li>
+          </ul>
+        </dd>
+    </d1>
+    <br>
+    <img src="{{url_for('static', filename='img2.png')}}"width = "50px" height = "50px">
+    <!-- explanation -->
+    <br>
+    Geodatabases are object relational. The information is stored as rows that have identities- these are the geodatabase objects.
+    When the tables are stored in DBMS(database management systems) like Oracle, IBM DB2, PostgreSQL, or Microsoft SQL server, they are generally stored using a SQL spatial type, and can be accessed with SQL.
+    <br>
+    <img src="{{url_for('static', filename='img3.png')}}"width = "50px" height = "50px">
+    <br>
+    <!-- explanation -->
+    </p>
+    <!-------------------------------------------------------->
+    <hr>
+    <!-------------------------------------------------------->
+    <h3><a name = "2"> Types of Geodatabases </a></h3>
+    <p>
+      Geodatabases can scale from small, single-user databases built on files up to larger workgroup geodatabases accessible by many users.  There are a few main types:
+      <ul>
+        <li> Personal geodatabases </li>
+        <li> File geodatabases </li>
+        <li> Enterprise geodatabases </li>
+      </ul>
+    </p>
+
+    <h4> Personal Geodatabases </h4>
+    <br>
+    <img src="{{url_for('static', filename='img4.png')}}"width = "50px" height = "50px">
+    <br>
+    <ul>
+      <li> Have a .mdb file extension (Microsoft Access database format).
+        <ul>
+          <li> Windows only </li>
+        </ul>
+      </li>
+      <li> Has a 2GB size limitation. </li>
+      <li> Can be read by multiple people at a time, but edited by only one person at a time. </li>
+      <li> Better choice for outputs and analysis.</li>
+      <li> Data can be transferred to an enterprise geodatabase using ArcCatalog™.</li>
+    </ul>
+
+    <h4> File Geodatabases </h4>
+    <br>
+    <img src="{{url_for('static', filename='img5.png')}}"width = "50px" height = "50px">
+    <br>
+      <ul>
+        <li> Have a .gdb file extension. </li>
+        <li> Each dataset is a separate file on disk. All the datasets that belong to one geodatabase are contained in a single folder. </li>
+        <li> By default, each dataset can grow to 1TB. </li>
+        <li> Can be read by multiple people at a time, but edited by only one person at a time.</li>
+        <li> Better choice for editing and storing large amounts of information.</li>
+      </ul>
+
+    <h4> Enterprise Geodatabases </h4>
+    <ul>
+      <li> Suitable for large workgroups. </li>
+      <li> Can be read and edited by multiple users at the same time. </li>
+      <li> Can store both vector and raster data </li>
+      <li> Require ArcSDE software (allows you to view and work with data) and DBMS (stores spatial data).</li>
+    </ul>
+
+
+    <!-------------------------------------------------------->
+    <hr>
+    <!-------------------------------------------------------->
+
+    <h3> <a name = "3"> Usage with Python </a> </h3>
+    <p> All geoprocessing tools can be accessed from Python using ArcPy. Simply include the following code in order to use it: <br>
+      <code>
+        import arcpy <br>
+        arcpy.env.workspace = "c:/PATH/file_name.gdb" <br>
+        result = arcpy.function_name(parameter, parameter)
+
+      </code>
+    </p>
+    <!-------------------------------------------------------->
+    <hr>
+    <!-------------------------------------------------------->
+
+    <h3> <a name = "4"> Advantages of Geodatabases </a> </h3>
+    <ul>
+      <li> Multiple types of GIS data can be stored in a single geodatabase, making it easier to manage and access. </li>
+      <li> Supports 2-, 3-, and 4-D vector features. </li>
+      <li> Can be compressed to .zip files, so they are much better for datasets massive in size. </li>
+      <li> There is no limit to the geodatabase size (tables and feature classes have a limit of 1TB).</li>
+    </ul>
+    <!-------------------------------------------------------->
+    <hr>
+    <!-------------------------------------------------------->
+
+
+    <h3> <a name = "5">Drawbacks of Geodatabases </a> </h3>
+    <ul>
+      <li> Geodatabases (especially file geodatabases) need an Esri environment to run. Once outside, it becomes less consumable. </li>
+      <ul>
+        <li> Compare this to shapefiles, which can be consumed by almost 100% of GIS software. </li>
+      </ul>
+      <li> Shapefiles are better for cross-platform sharing. </li>
+
+    </ul>
+
+    <!-------------------------------------------------------->
+    <hr>
+    <!-------------------------------------------------------->
+
+    <h4><a name = "6"> Sources </a></h4>
+    <p>
+      <ul>
+        <li> http://www.vancecounty.org/departments/gis-geographic-information-system/ </li>
+        <li> http://desktop.arcgis.com/en/arcmap/10.3/manage-data/geodatabases/the-architecture-of-a-geodatabase.html </li>
+        <li> http://www.geography.hunter.cuny.edu/~jochen/GTECH361/lectures/lecture07/concepts/01%20-%20What%20exactly%20is%20a%20geodatabase.html</li>
+        <li> https://nhd.usgs.gov/userGuide/Robohelpfiles/NHD_User_Guide/Interactive_Tutorials/Module_1/Dynamic_Extract/Dynamic_Extract_Popups/Personal_Vs_File_GDB_s.html</li>
+        <li> http://desktop.arcgis.com/en/arcmap/10.3/manage-data/geodatabases/what-is-a-geodatabase.html</li>
+        <li> http://www.vancecounty.org/departments/gis-geographic-information-system/</li>
+        <li>https://vance.connectgis.com/Map.aspx</li>
+      </ul>
+    </p>
+    </div>
+  </body>
+</html>
